@@ -12,7 +12,7 @@ const Orders = () => {
     {
       id: 0,
       date: "data",
-      cpf: 2,
+      cpf: "cpf",
       payment_method: "prazo",
       itens_qtd: 2,
       total_value: 3,
@@ -59,7 +59,7 @@ const Orders = () => {
     },
     {
       id: "cpf",
-      numeric: true,
+      numeric: false,
       disablePadding: false,
       label: "Cpf",
     },
@@ -86,7 +86,7 @@ const Orders = () => {
   return (
     <Layout>
       <Box> Lista de Pedidos </Box>
-      <CustomTable rows={rows} headCells={headCells} />
+      <CustomTable rows={rows} headCells={headCells} editPath="/orders/edit" />
     </Layout>
   );
 };

@@ -9,7 +9,7 @@ const EditTemplate: React.FC = () => {
   const formik = useFormik<IOrder>({
     initialValues: {
       date: "",
-      cpf: 0,
+      cpf: "",
       payment_method: "",
       itens_qtd: 0,
       total_value: 0,
@@ -45,15 +45,19 @@ const EditTemplate: React.FC = () => {
           error={!!errors.cpf}
           helperText={errors.cpf}
         />
-        <TextField
+        <Select
           name="payment_method"
           label="Método de pagamento"
           fullWidth
           value={values.payment_method}
-          onChange={handleChange}
+          onChange={(e) => setFieldValue("payment_method", e.target.value)}
           error={!!errors.payment_method}
-          helperText={errors.payment_method}
-        />
+        >
+          <MenuItem value="morango">A vista</MenuItem>
+          <MenuItem value="abacaxi">A prazo</MenuItem>
+          <MenuItem value="chocolate">PIX</MenuItem>
+          <MenuItem value="">-- Não Informado --</MenuItem>
+        </Select>
         <TextField
           name="itens_qtd"
           label="Quantidade de itens"

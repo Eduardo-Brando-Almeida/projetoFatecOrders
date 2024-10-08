@@ -3,9 +3,14 @@ import Layout from "@/components/templates/ui/organisms/Layout";
 import { IProduct } from "@/interfaces/IProduct";
 import { ProductEditValidator } from "@/validators/ProductEditValidator";
 import { TextField, Select, MenuItem, Button, Box } from "@mui/material";
-import { useFormik, validateYupSchema } from "formik";
+import { useFormik } from "formik";
+import { useEffect } from "react";
 
-const EditTemplate: React.FC = () => {
+interface EditTemplateProps {
+  product?: IProduct;
+}
+
+const EditTemplate: React.FC<EditTemplateProps> = ({ product }) => {
   const formik = useFormik<IProduct>({
     initialValues: {
       brand: "",
@@ -21,7 +26,22 @@ const EditTemplate: React.FC = () => {
     },
   });
 
-  const { handleSubmit, values, handleChange, setFieldValue, errors } = formik;
+  const {
+    handleSubmit,
+    values,
+    handleChange,
+    setFieldValue,
+    errors,
+    setValues,
+  } = formik;
+
+  useEffect(() => {
+    if (!product) return;
+
+    const { id, ...prod } = product;
+
+    setValues(prod);
+  }, [product, setValues]);
 
   //<div>{params.slug}</div>;
   return (
